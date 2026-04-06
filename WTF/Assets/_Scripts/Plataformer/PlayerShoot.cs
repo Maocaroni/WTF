@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
     }
 
     void SwitchBullet()
-    {s
+    {
         if (currentBullet == bullet)
         {
             currentBullet = bullet1;
