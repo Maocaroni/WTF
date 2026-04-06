@@ -5,30 +5,57 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public GameObject bullet;
+    [Header("Configuración de Balas")]
+    public GameObject bullet;      
+    public GameObject bullet1;      
+    private GameObject currentBullet; 
+
     public Transform startPos;
     public int maxDisparos = 3;
-    private int disparosActuales = 0;
+    public int disparosActuales;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        disparosActuales = maxDisparos;
+        currentBullet = bullet; 
     }
 
-    public void Shoot(InputAction.CallbackContext context)
-
+    void Update()
     {
-        Debug.Log("Dispara");
-        if(context.started)
+       
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (disparosActuales < maxDisparos)
-            {
+            SwitchBullet();
+        }
+    }
+
+    void SwitchBullet()
+    {s
+        if (currentBullet == bullet)
+        {
+            currentBullet = bullet1;
+            Debug.Log("Equipada: Bala 2");
+        }
+        else
+        {
+            currentBullet = bullet;
+            Debug.Log("Equipada: Bala 1");
+        }
+    }
+
+   
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        if (context.started && disparosActuales > 0)
+        {
             
-                GameObject bulletClone = Instantiate(bullet, startPos.position, startPos.rotation);
-                Destroy(bulletClone, 1);
-                disparosActuales = disparosActuales + 1;
-            }
+            Instantiate(currentBullet, startPos.position, startPos.rotation);
+            disparosActuales--;
+            Debug.Log("Disparo con " + currentBullet.name + ". Quedan: " + disparosActuales);
+        }
+        else if (context.started && disparosActuales <= 0)
+        {
+            Debug.Log("¡Sin munición!");
         }
     }
 }

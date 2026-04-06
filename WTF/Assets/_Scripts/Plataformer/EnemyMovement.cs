@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Variables iniciales par cuadrar los l[imites de movimiento de los enemigos.
+
     [SerializeField] GameObject pointA;
     [SerializeField] GameObject pointB;
 
-    // Variable que guarde el punto actual de movimiento.
+
     private Transform currentPoint;
 
-    // Variable que almacena el Rigidbody del enemigo.
     private Rigidbody2D rb;
 
-    // Variable que almacena la velocidad de movimiento.
+
     public float speed;
 
     [HideInInspector] public bool canMove;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,12 +26,12 @@ public class EnemyMovement : MonoBehaviour
         canMove = true;
     }
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         if (canMove)
         {
-            // Se llaman los métodos para el movimiento.
+
             Movement();
             FlipMovement();
         }
@@ -44,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Movement()
     {
-        // Valida si el enemigo se acerca a uno de los puntos para que cambie el punto objetivo.
+
         if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
         {
             currentPoint = pointA.transform;
@@ -58,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FlipMovement()
     {
-        // Modifica la velcidad y la rotación del enemigo si llega a uno de los puntos para que se dirija al otro.
+ 
         if (currentPoint == pointB.transform)
         {
             rb.velocity = new Vector2(speed, 0);

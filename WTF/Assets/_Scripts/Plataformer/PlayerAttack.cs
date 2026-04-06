@@ -19,15 +19,13 @@ public class PlayerAttack : MonoBehaviour
             if(_rb.velocity.y < 0)
             {
                 _rb.AddForce(transform.up * bounceForce, ForceMode2D.Impulse);
-                
-                // --- AQUÍ AÑADIMOS LA ANIMACIÓN ---
+  
                 collision.GetComponent<Animator>().SetTrigger("Die");
-                // ----------------------------------
+
 
                 collision.GetComponent<EnemyMovement>().canMove = false;
                 
-                // Desactivamos el collider para que el personaje no siga chocando 
-                // con el enemigo mientras este hace la animación de morir.
+         
                 collision.enabled = false; 
 
                 Destroy(collision.gameObject, 1);
