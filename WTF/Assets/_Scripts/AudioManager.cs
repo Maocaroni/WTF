@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip jump;
     public AudioClip coinPickUp;
 
+    public Slider backgroundMusicSlider;
 
     private void Awake()
     {
@@ -26,6 +28,10 @@ public class AudioManager : MonoBehaviour
         }
     }
     
+    void Start()
+    {
+        backgroundMusicSlider.value = backgroundSource.volume;
+    }
     public void PlayJump()
     {
         PlaySound(jump);
@@ -42,4 +48,8 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip);
     }
 
+    public void VolumeSlider()
+    {
+        backgroundSource.volume = backgroundMusicSlider.value;
+    }
 }
