@@ -10,6 +10,7 @@ public class Coins : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.instance.PlayCoin();
             PlayerStats.score += coinValue;
             Destroy(gameObject);
             Debug.Log(PlayerStats.score);
